@@ -13,6 +13,7 @@ const partials = {
   header: read('partials/header.html'),
   footer: read('partials/footer.html'),
   newsletter: read('partials/newsletter.html'),
+  hex: read('partials/hex.html'),
 };
 
 function fill(html, vars) {
@@ -40,7 +41,7 @@ for (const file of fs.readdirSync(path.join(SRC, 'pages'))) {
     page: { ...meta, slug, canonical: `${config.siteUrl}/${slug}` },
   };
 
-  let body = raw.slice(match[0].length).replace('<!-- @newsletter -->', partials.newsletter);
+  let body = raw.slice(match[0].length).replace('<!-- @newsletter -->', partials.newsletter).replaceAll('<!-- @hex -->', partials.hex);
   let html = layout
     .replace('<!-- @header -->', partials.header)
     .replace('<!-- @content -->', body)
