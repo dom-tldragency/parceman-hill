@@ -20,10 +20,15 @@ Wire up the integrations in `site.config.json`. Until a form has an endpoint, it
 | `forms.newsletter` | Kit form URL: `https://app.kit.com/forms/<id>/subscriptions` |
 | `forms.roundtable` | Kit form with an `events` tag |
 | `forms.collective` | Kit form with a `collective` tag |
+| `forms.handbook` | Kit form for the 2027 handbook pop-up (tag `handbook-2027`, deliver the PDF from Kit) |
 | `forms.clientEnquiry`, `forms.associate` | Form handler endpoint (e.g. Formspree), or swap for Tally embeds |
 | `resources.*` | Tally form links for each gated resource (Tally to Kit via Zapier) |
 
 Set `draftBanner` to `false` to remove the review banner.
+
+Voice films: drop vertical MP4s into `src/assets/video/` and set `data-video="/assets/video/<file>.mp4"` on each tile in `src/pages/index.html`.
+
+The handbook pop-up opens after 20 seconds or 55% scroll (not on the contact page), and stays closed for 7 days once dismissed. Add `?nopopup` to a URL to suppress it.
 
 ## Open items flagged on the site (yellow "TBC" chips)
 
@@ -33,3 +38,5 @@ Set `draftBanner` to `false` to remove the review banner.
 - "The Collective": Scott to OK the name
 - Investment Broking: one plain-English line
 - Case studies: one measurable result and a duration each, confirmed with the delivering partner
+- 2027 Delivery Handbook: contents are a draft; the handbook itself needs writing
+- Voice films: topics are suggestions; record and add the files

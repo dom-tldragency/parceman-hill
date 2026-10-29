@@ -1,0 +1,40 @@
+<dialog class="handbook" id="handbook" aria-labelledby="hb-title">
+  <button class="hb-close" type="button" data-close-handbook aria-label="Close">&times;</button>
+  <div class="hb-grid">
+    <div class="hb-cover" aria-hidden="true">
+      <div class="hb-book">
+        <svg viewBox="0 0 600 600" class="hb-mark">
+          <polygon points="300,20 542.5,160 542.5,440 300,580 57.5,440 57.5,160"/>
+          <polygon points="300,100 473.2,200 473.2,400 300,500 126.8,400 126.8,200"/>
+          <path d="M258 266 L350 266 L298 350 L295 302 Z"/>
+        </svg>
+        <p class="hb-year">2027</p>
+        <p class="hb-book-title">The Delivery Handbook</p>
+        <p class="hb-book-sub">For CIOs and IT directors</p>
+        <img src="/assets/logo.png" alt="" class="hb-logo">
+      </div>
+    </div>
+    <div class="hb-body">
+      <p class="eyebrow">Free download <span class="tbc" title="Handbook contents are a draft for Gary and Scott to confirm">Contents draft</span></p>
+      <h2 id="hb-title">The 2027 Delivery Handbook <span class="gold">for CIOs.</span></h2>
+      <p class="muted">How to plan, resource and land projects in 2027, from the partners who deliver them.</p>
+      <ol class="hb-contents">
+        <li>Agreeing value with the board before budget is committed</li>
+        <li>Contractors, Tier-1 or partner-led: choosing a resourcing model</li>
+        <li>Planning around fixed regulatory deadlines</li>
+        <li>Where AI helps delivery, and where it adds risk</li>
+        <li>Getting control of vendor sprawl</li>
+        <li>Recovering a programme in its first 30 days</li>
+        <li>Checklists to run on your own programme</li>
+      </ol>
+      <form class="form js-form hb-form" action="{{forms.handbook}}" method="post" data-success="Thanks. The handbook is on its way to your inbox.">
+        <div class="form-row">
+          <label>First name<input name="fields[first_name]" autocomplete="given-name" required></label>
+          <label>Work email<input type="email" name="email_address" autocomplete="email" required></label>
+        </div>
+        <button class="btn" type="submit">Send me the handbook</button>
+        <p class="form-note">We'll email you the handbook and add you to our monthly newsletter. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</dialog>

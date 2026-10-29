@@ -77,3 +77,74 @@ if (topic && topicSelect) {
   const opt = [...topicSelect.options].find((o) => o.value === topic);
   if (opt) topicSelect.value = topic;
 }
+
+// Homepage hexagon: layers drift with the pointer and the page scroll
+const hexHero = document.querySelector('.hex-hero');
+if (hexHero && !reduced) {
+  const layers = hexHero.querySelectorAll('[data-depth]');
+  const heroEl = hexHero.closest('.hero');
+  heroEl.addEventListener('pointermove', (e) => {
+    const r = heroEl.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    layers.forEach((l) => {
+      const d = Number(l.dataset.depth);
+      l.style.transform = `translate(${x * d}px, ${y * d}px)`;
+    });
+  });
+  heroEl.addEventListener('pointerleave', () => layers.forEach((l) => { l.style.transform = ''; }));
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      hexHero.style.setProperty('--sy', `${scrollY * 0.25}px`);
+      hexHero.style.setProperty('--rot', `${scrollY * 0.04}deg`);
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+// 2027 handbook pop-up: opens from any [data-open-handbook] button, or once
+// after 20s or 55% scroll. Dismissing it keeps it closed for 7 days.
+const handbook = document.getElementById('handbook');
+if (handbook && typeof handbook.showModal === 'function') {
+  const KEY = 'ph-handbook-dismissed';
+  const WEEK = 7 * 24 * 60 * 60 * 1000;
+  const recentlyDismissed = () => {
+    try { return Date.now() - Number(localStorage.getItem(KEY) || 0) < WEEK; } catch { return false; }
+  };
+  const remember = () => { try { localStorage.setItem(KEY, String(Date.now())); } catch {} };
+  const open = () => { if (!handbook.open) handbook.showModal(); };
+  document.querySelectorAll('[data-open-handbook]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); open(); }));
+  handbook.querySelectorAll('[data-close-handbook]').forEach((b) => b.addEventListener('click', () => handbook.close()));
+  handbook.addEventListener('click', (e) => { if (e.target === handbook) handbook.close(); });
+  handbook.addEventListener('close', remember);
+
+  const auto = !location.pathname.startsWith('/contact') && !recentlyDismissed() && !new URLSearchParams(location.search).has('nopopup');
+  if (auto) {
+    let fired = false;
+    const fire = () => { if (fired || recentlyDismissed()) return; fired = true; open(); };
+    setTimeout(fire, 20000);
+    addEventListener('scroll', () => {
+      if (scrollY / (document.body.scrollHeight - innerHeight) > 0.55) fire();
+    }, { passive: true });
+  }
+  if (location.hash === '#handbook') open();
+}
+
+// Voice tiles: play the vertical film inline once a file is set in data-video
+document.querySelectorAll('.voice').forEach((tile) => {
+  tile.addEventListener('click', () => {
+    const src = tile.dataset.video;
+    if (!src) {
+      tile.classList.add('show-soon');
+      setTimeout(() => tile.classList.remove('show-soon'), 1800);
+      return;
+    }
+    if (tile.classList.contains('playing')) return;
+    const v = Object.assign(document.createElement('video'), { src, controls: true, autoplay: true, playsInline: true });
+    tile.appendChild(v);
+    tile.classList.add('playing');
+  });
+});
