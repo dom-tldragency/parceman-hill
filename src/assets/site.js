@@ -34,6 +34,80 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal, .stagger, .frame').forEach((el) => io.observe(el));
 
+// Headlines reveal word by word (an <em> phrase moves as one piece)
+document.querySelectorAll('main h1, main h2').forEach((h) => {
+  let i = 0;
+  const wrap = (node) => {
+    const w = document.createElement('span');
+    w.className = 'w';
+    const inner = document.createElement('span');
+    inner.style.setProperty('--i', i++);
+    inner.appendChild(node);
+    w.appendChild(inner);
+    return w;
+  };
+  [...h.childNodes].forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        frag.appendChild(/^\s+$/.test(part) ? document.createTextNode(part) : wrap(document.createTextNode(part)));
+      });
+      h.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE && !node.classList.contains('tbc')) {
+      const placeholder = document.createComment('');
+      h.replaceChild(placeholder, node);
+      h.replaceChild(wrap(node), placeholder);
+    }
+  });
+  h.classList.add('words');
+  io.observe(h);
+});
+
+// Gold spotlight that follows the cursor across cards
+if (matchMedia('(pointer: fine)').matches) {
+  document.querySelectorAll('.card, .case, .platform, .steps li, .client-wall li').forEach((el) => {
+    el.classList.add('spot');
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  // Buttons lean towards the cursor
+  if (!reduced) {
+    document.querySelectorAll('.btn').forEach((b) => {
+      b.addEventListener('pointermove', (e) => {
+        const r = b.getBoundingClientRect();
+        b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.18}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
+      });
+      b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    });
+  }
+}
+
+// Gold scroll progress line, and hexagons that turn with the scroll
+const progress = document.createElement('div');
+progress.className = 'progress';
+document.body.appendChild(progress);
+let ticking = false;
+const onFrame = () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0);
+  if (!reduced) {
+    document.querySelectorAll('.hex-hero').forEach((hex) => {
+      const top = hex.closest('section').offsetTop;
+      const d = scrollY - top;
+      hex.style.setProperty('--sy', `${d * 0.2}px`);
+      hex.style.setProperty('--rot', `${d * 0.04}deg`);
+    });
+  }
+  ticking = false;
+};
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onFrame); } }, { passive: true });
+onFrame();
+
 // Forms: post to the configured endpoint (Kit or form handler). Until an endpoint
 // is set in site.config.json, show a preview notice instead of submitting.
 document.querySelectorAll('.js-form').forEach((form) => {
@@ -78,31 +152,19 @@ if (topic && topicSelect) {
   if (opt) topicSelect.value = topic;
 }
 
-// Homepage hexagon: layers drift with the pointer and the page scroll
-const hexHero = document.querySelector('.hex-hero');
-if (hexHero && !reduced) {
-  const layers = hexHero.querySelectorAll('[data-depth]');
-  const heroEl = hexHero.closest('.hero');
-  heroEl.addEventListener('pointermove', (e) => {
-    const r = heroEl.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    layers.forEach((l) => {
-      const d = Number(l.dataset.depth);
-      l.style.transform = `translate(${x * d}px, ${y * d}px)`;
+// Hexagons: layers drift with the pointer, and each turns gently as its section scrolls
+if (!reduced) {
+  document.querySelectorAll('.hex-hero').forEach((hex) => {
+    const layers = hex.querySelectorAll('[data-depth]');
+    const section = hex.closest('section');
+    section.addEventListener('pointermove', (e) => {
+      const r = section.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      layers.forEach((l) => { l.style.transform = `translate(${x * l.dataset.depth}px, ${y * l.dataset.depth}px)`; });
     });
+    section.addEventListener('pointerleave', () => layers.forEach((l) => { l.style.transform = ''; }));
   });
-  heroEl.addEventListener('pointerleave', () => layers.forEach((l) => { l.style.transform = ''; }));
-  let ticking = false;
-  addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      hexHero.style.setProperty('--sy', `${scrollY * 0.25}px`);
-      hexHero.style.setProperty('--rot', `${scrollY * 0.04}deg`);
-      ticking = false;
-    });
-  }, { passive: true });
 }
 
 // 2027 handbook pop-up: opens from any [data-open-handbook] button, or once

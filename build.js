@@ -43,7 +43,7 @@ for (const file of fs.readdirSync(path.join(SRC, 'pages'))) {
     page: { ...meta, slug, canonical: `${config.siteUrl}/${slug}` },
   };
 
-  let body = raw.slice(match[0].length).replace('<!-- @newsletter -->', partials.newsletter).replace('<!-- @hex-hero -->', partials.hexHero).replaceAll('<!-- @hex -->', partials.hex);
+  let body = raw.slice(match[0].length).replace('<!-- @newsletter -->', partials.newsletter).replace('<!-- @hex-hero -->', partials.hexHero).replaceAll('<!-- @hex -->', partials.hexHero);
   let html = layout
     .replace('<!-- @header -->', partials.header)
     .replace('<!-- @content -->', body)
