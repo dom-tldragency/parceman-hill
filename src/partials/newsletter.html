@@ -1,14 +1,14 @@
 <section class="newsletter" aria-labelledby="nl-title">
-  <div class="wrap newsletter-inner">
+  <div class="wrap newsletter-inner reveal">
     <div>
-      <p class="eyebrow">The newsletter <span class="tbc" title="Newsletter name to be chosen">name TBC</span></p>
-      <h2 id="nl-title">What CIOs are dealing with right now, once a month.</h2>
-      <p class="lede">Roundtable takeaways, delivery lessons and new resources. Lands the last Thursday of every month.</p>
+      <p class="eyebrow">Monthly newsletter <span class="tbc" title="Newsletter name to be chosen">Name TBC</span></p>
+      <h2 id="nl-title">What CIOs raised at our roundtables, in your inbox monthly.</h2>
+      <p class="lede">Roundtable takeaways, delivery lessons from live programmes and new resources. Sent the last Thursday of every month.</p>
     </div>
-    <form class="form form-inline js-form" action="{{forms.newsletter}}" method="post" data-success="You're on the list. First one lands the last Thursday of the month.">
+    <form class="form form-inline js-form" action="{{forms.newsletter}}" method="post" data-success="You're on the list. The next issue lands the last Thursday of the month.">
       <label><span>First name</span><input name="fields[first_name]" autocomplete="given-name" required></label>
       <label><span>Work email</span><input type="email" name="email_address" autocomplete="email" required></label>
-      <button class="btn" type="submit">Subscribe</button>
+      <button class="btn" type="submit">Send me the newsletter</button>
       <p class="form-note">One email a month. Unsubscribe any time.</p>
     </form>
   </div>

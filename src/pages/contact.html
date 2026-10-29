@@ -1,15 +1,16 @@
-<!--meta {"title":"Contact | Parceman Hill","description":"Talk to a Parceman Hill partner about your programme, or apply to join our network of associate consultants. info@parcemanhill.com, +44 (0)1202 923777.","nav":"contact"} -->
-<section class="page-hero">
-  <div class="wrap">
+<!--meta {"title":"Book a call with a partner | Parceman Hill","description":"Book a call with a Parceman Hill partner about your programme, or apply to join our network of associate consultants. info@parcemanhill.com, +44 (0)1202 923777.","nav":"contact"} -->
+<section class="photo-hero page-hero">
+  <div class="bg"><img src="/assets/img/london-day.jpg" alt="Aerial view of the Thames and Tower Bridge" fetchpriority="high"></div>
+  <div class="wrap hero-in">
     <p class="eyebrow">Contact</p>
-    <h1>Talk to a partner.</h1>
-    <p class="lede">Tell us what's going on. A partner will come back to you personally.</p>
+    <h1>Book a call with a partner.</h1>
+    <p class="lede">Tell us what's going on with your programme. A partner will come back to you personally.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap contact-grid">
-    <div>
+    <div class="reveal">
       <div class="tabs" role="tablist" aria-label="Enquiry type">
         <button role="tab" id="tab-clients" aria-controls="panel-clients" aria-selected="true">I need delivery help</button>
         <button role="tab" id="tab-associates" aria-controls="panel-associates" aria-selected="false">I want to join the network</button>
@@ -23,8 +24,19 @@
           </div>
           <div class="form-row">
             <label>Organisation<input name="organisation" autocomplete="organization"></label>
-            <label>Role<input name="role" autocomplete="organization-title"></label>
+            <label>Role<input name="role" autocomplete="organization-title" placeholder="e.g. CIO, IT Director"></label>
           </div>
+          <label>What do you need help with?
+            <select name="topic">
+              <option value="recovery">Recovering a programme that's off track</option>
+              <option value="regulatory">Regulatory or compliance change</option>
+              <option value="technology">Technology delivery or migration</option>
+              <option value="vendors">Vendor selection and management</option>
+              <option value="contractors">Replacing contractors with a Statement of Work</option>
+              <option value="capacity">Business analysis or PM capacity</option>
+              <option value="other">Something else</option>
+            </select>
+          </label>
           <label>What's going on?<textarea name="message" required placeholder="The programme, the problem, the timeline. As much or as little as you like."></textarea></label>
           <label class="check"><input type="checkbox" name="newsletter" value="yes"> Send me the monthly newsletter too</label>
           <button class="btn" type="submit">Send to a partner</button>
@@ -49,17 +61,17 @@
             <label>LinkedIn profile<input type="url" name="linkedin" placeholder="https://"></label>
           </div>
           <label>Tell us about your experience<textarea name="message"></textarea></label>
-          <button class="btn" type="submit">Send</button>
+          <button class="btn" type="submit">Apply to join</button>
         </form>
       </div>
     </div>
 
-    <aside class="contact-direct">
+    <aside class="contact-direct reveal">
       <p class="eyebrow">Or get in touch directly</p>
       <a class="big" href="mailto:info@parcemanhill.com">info@parcemanhill.com</a>
       <a class="big" href="tel:+441202923777">+44 (0)1202 923777</a>
       <a class="big" href="https://www.linkedin.com/company/parceman-hill" rel="noopener">LinkedIn</a>
-      <p class="muted" style="margin-top:24px">Not ready to talk? <a class="link" href="/insights#resources">Start with the free resources</a>.</p>
+      <p class="muted" style="margin-top:24px">Not ready to talk yet? <a class="link" href="/insights#resources">Download a free resource</a></p>
     </aside>
   </div>
 </section>
