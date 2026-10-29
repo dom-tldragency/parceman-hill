@@ -1,0 +1,73 @@
+<!--meta {"title":"Community: roundtables and The Collective | Parceman Hill","description":"Breakfast roundtables for senior IT leaders, and The Collective: run by Parceman Hill, nobody gets pitched, off the record.","nav":"community"} -->
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Community</p>
+    <h1>A room where CIOs can say what they actually think.</h1>
+    <p class="lede">Two ways in: our breakfast roundtables, and The Collective.</p>
+  </div>
+</section>
+
+<section class="section" id="roundtables">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Roundtables</p>
+      <h2>Breakfast roundtables for senior IT leaders.</h2>
+      <p class="lede">A small room, one topic and a good breakfast. No slides, no sales pitch.</p>
+      <div class="next-up"><span class="when">Late November</span><strong>Procurement roundtable</strong></div>
+      <p class="muted" style="margin-top:24px">From January 2027 we run one every month, alternating two formats:</p>
+      <div class="choice"><strong>Speaker sessions</strong><p>A guest speaker opens the topic, then the room takes over.</p></div>
+      <div class="choice"><strong>Peer sessions</strong><p>No speaker. CIOs bring a live problem and work it through together.</p></div>
+      <blockquote class="quote" style="margin-top:40px">
+        &ldquo;Really useful and insightful.&rdquo;
+        <cite>Roundtable attendee</cite>
+      </blockquote>
+    </div>
+    <div class="panel panel-light">
+      <h3>Register interest</h3>
+      <p class="muted">We'll send you details of the next roundtable. Places are limited.</p>
+      <form class="form js-form" action="{{forms.roundtable}}" method="post" data-success="Thanks. We'll be in touch with details of the next roundtable.">
+        <div class="form-row">
+          <label>First name<input name="fields[first_name]" autocomplete="given-name" required></label>
+          <label>Last name<input name="fields[last_name]" autocomplete="family-name"></label>
+        </div>
+        <label>Work email<input type="email" name="email_address" autocomplete="email" required></label>
+        <div class="form-row">
+          <label>Role<input name="fields[role]" autocomplete="organization-title"></label>
+          <label>Organisation<input name="fields[organisation]" autocomplete="organization"></label>
+        </div>
+        <label>Topics you'd want on the table (optional)<input name="fields[topics]"></label>
+        <button class="btn" type="submit">Register interest</button>
+        <p class="form-note">We'll also send you our monthly newsletter. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section dark on-dark" id="collective">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">By referral <span class="tbc" title="Awaiting Scott's OK to use the name">Name TBC</span></p>
+      <h2>The Collective</h2>
+      <ul class="three-lines">
+        <li>Run by the team at Parceman Hill.</li>
+        <li>Nobody gets pitched.</li>
+        <li>Everything is off the record.</li>
+      </ul>
+    </div>
+    <div class="panel panel-dark" style="padding-left:0;padding-right:0">
+      <h3>Ask about a referral</h3>
+      <p class="muted">Leave your details and someone from the team will get in touch.</p>
+      <form class="form js-form" action="{{forms.collective}}" method="post" data-success="Thanks. Someone from the team will be in touch.">
+        <div class="form-row">
+          <label>First name<input name="fields[first_name]" autocomplete="given-name" required></label>
+          <label>Last name<input name="fields[last_name]" autocomplete="family-name"></label>
+        </div>
+        <label>Work email<input type="email" name="email_address" autocomplete="email" required></label>
+        <label>Organisation<input name="fields[organisation]" autocomplete="organization"></label>
+        <button class="btn" type="submit">Ask about a referral</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- @newsletter -->

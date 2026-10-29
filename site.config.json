@@ -1,0 +1,15 @@
+{
+  "siteUrl": "https://www.parcemanhill.com",
+  "draftBanner": true,
+  "forms": {
+    "newsletter": "",
+    "roundtable": "",
+    "collective": "",
+    "clientEnquiry": "",
+    "associate": ""
+  },
+  "resources": {
+    "regulatoryChecklist": "#resources",
+    "governmentPlaybook": "#resources"
+  }
+}
